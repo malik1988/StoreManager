@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>516</width>
+    <height>328</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>端口：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_port"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>消息ID：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_msgId">
+       <property name="inputMask">
+        <string>99999</string>
+       </property>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>设备ID：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_devId">
+       <property name="inputMask">
+        <string>HHHH</string>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTextEdit" name="textEdit_msg">
+     <property name="toolTip">
+      <string>发送消息</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTextBrowser" name="textBrowser">
+     <property name="toolTip">
+      <string>显示数据</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="pushButton_connect">
+       <property name="text">
+        <string>打开连接</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_send">
+       <property name="text">
+        <string>发送</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_send</sender>
+   <signal>pressed()</signal>
+   <receiver>Dialog</receiver>
+   <slot>slot_send_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>412</x>
+     <y>310</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_port</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>Dialog</receiver>
+   <slot>slot_port_change(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>101</x>
+     <y>3</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_connect</sender>
+   <signal>pressed()</signal>
+   <receiver>Dialog</receiver>
+   <slot>slot_connect_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>147</x>
+     <y>310</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>slot_send_click()</slot>
+  <slot>slot_port_change(QString)</slot>
+  <slot>slot_connect_click()</slot>
+ </slots>
+</ui>

@@ -103,7 +103,6 @@ class DataListView(ui_mainwindow, qtbaseclass):
         self.reject()
 
 
-
 if __name__ == '__main__':
     # d = DBManager()
     # d.create()

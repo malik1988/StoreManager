@@ -18,11 +18,11 @@ Ui_MainWindow, QtBaseClass = uic.loadUiType(ui_file)
 
 
 class Login(Ui_MainWindow, QtBaseClass):
-    def __init__(self):
-        super(Login, self).__init__()
+    def __init__(self, parent=None):
+        super(Login, self).__init__(parent)
         self.setupUi(self)
-        # self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
-        self.showFullScreen() # 全屏模式
+        self.setWindowFlags(QtCore.Qt.Dialog)
+        # self.showFullScreen() # 全屏模式
 
         self.user = None  # 用户名
         self.pwd = None  # 密码

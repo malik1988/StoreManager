@@ -3,9 +3,8 @@
 
 from datalistview import DataListView
 from submenu import SubMenu
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtGui
 from datamanager import MsgDataManager
-from PyQt5 import QtSql
 from login import UserLogin
 
 PORT_NAME = 'com2'
@@ -14,10 +13,12 @@ PORT_NAME = 'com2'
 class Menu(DataListView):
     msgManger = MsgDataManager(PORT_NAME)
     # 数据库相关
-    model = QtSql.QSqlQueryModel()
-    query = None
+    # model = QtSql.QSqlQueryModel()
+    # query = None
+    model = None
 
     # 用户信息
+    isLogin = False
     user_info = {}
 
     def __init__(self):
@@ -25,7 +26,6 @@ class Menu(DataListView):
 
         # 用户登录
         self.login()
-        
 
         # 设置界面
         # self.setStyleSheet("background-color:#2C3E50;")
@@ -34,28 +34,55 @@ class Menu(DataListView):
 
         self.setTableTitle('主菜单')
         self.setTableAutoStretch()
-        # 设置显示模型
-        self.setModel(self.model)
+        # 设置显示模
+        model = QtGui.QStandardItemModel()
+        headers = ('编号', '名称', '动作')
+        model.setHorizontalHeaderLabels(headers)
+        values = ('name1', 'name2', 'name3')
+        for i, x in enumerate(values):
+            model.setItem(i, 0, QtGui.QStandardItem(str(i)))
+            model.setItem(i, 1, QtGui.QStandardItem(x))
+            model.setItem(i, 2, QtGui.QStandardItem('start'))
+
+        self.model = model
+        self.setModel(model)
+        self.setTableReadOnly()
 
         # 关联接收事件处理
         self.msgManger.connectRead()
 
-    def slot_fresh_pressed(self):
-        win = SubMenu()
+    def show_sub_menu(self):
+        '''显示子菜单'''
+        self.setVisible(False)
+        win = SubMenu(user=self.user_info, db=self.msgManger.db)
         # 关联数据更新
-        self.msgManger.connectDataUpdate(win.slot_fresh_pressed)
-
-        win.showDialog()
+        self.msgManger.connectDataUpdate(win.update_data_view)
+        win.exec_()
+        # win.showDialog()
 
         # 子菜单窗口退出，断开数据更新
         self.msgManger.disconnectDataUpdate()
+        self.setVisible(True)
 
     def login(self):
         '''登录'''
-        user = UserLogin()
-        self.user_info[user.user] = user.pwd
+        if not self.isLogin:
+            user = UserLogin(self)
+            self.user_info[user.user] = user.pwd
+            self.isLogin = True
+            self.setVisible(True)
 
     def slot_close_click(self):
         '''关闭'''
+        self.setVisible(False)
+        self.isLogin = False
+
         self.login()
 
+    def slot_table_click(self, index):
+        col = index.column()
+        row = index.row()
+        value = str(self.model.index(row, col).data())
+
+        if value == 'start':
+            self.show_sub_menu()

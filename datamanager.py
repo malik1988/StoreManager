@@ -9,9 +9,10 @@ class MsgDataManager(ComMsg):
     '''消息数据处理
     '''
 
+    # 数据库接口
     db = QSqlDatabase.addDatabase('QSQLITE')
 
-    SQL_TABLENAME = 'message'
+    SQL_TABLENAME = 'Topper'
     FMT_SQL_CREATE = '''create table if not exists {0} 
             (id integer primary key,
             devId varchar(10),
@@ -22,6 +23,7 @@ class MsgDataManager(ComMsg):
     FMT_SQL_INSERT = 'insert into {0} ({1}) values ({2})'
 
     FMT_SQL_UPDATE = 'update '
+    SQL_DB_FILENAME = 'test.db'
 
     # 数据更新回调
     handler = None

@@ -15,7 +15,6 @@ class Menu(DataListView):
     # 数据库相关
     # model = QtSql.QSqlQueryModel()
     # query = None
-    model = None
 
     # 用户信息
     isLogin = False
@@ -44,7 +43,6 @@ class Menu(DataListView):
             model.setItem(i, 1, QtGui.QStandardItem(x))
             model.setItem(i, 2, QtGui.QStandardItem('start'))
 
-        self.model = model
         self.setModel(model)
         self.setTableReadOnly()
 
@@ -54,7 +52,7 @@ class Menu(DataListView):
     def show_sub_menu(self):
         '''显示子菜单'''
         self.setVisible(False)
-        win = SubMenu(user=self.user_info, db=self.msgManger.db)
+        win = SubMenu(parent=self, user=self.user_info, db=self.msgManger.db)
         # 关联数据更新
         self.msgManger.connectDataUpdate(win.update_data_view)
         win.exec_()

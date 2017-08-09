@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,3,0,0">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,3,0,0">
      <item>
       <widget class="QLabel" name="logo_left">
        <property name="sizePolicy">
@@ -30,17 +30,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>刷新</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QLabel" name="tableTitle">
        <property name="font">
         <font>
-         <pointsize>25</pointsize>
+         <family>Aharoni</family>
+         <pointsize>36</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -55,11 +49,19 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_close">
+       <property name="font">
+        <font>
+         <family>Aharoni</family>
+         <pointsize>26</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::RightToLeft</enum>
        </property>
        <property name="text">
-        <string>关闭</string>
+        <string>退出</string>
        </property>
       </widget>
      </item>
@@ -85,7 +87,34 @@
     </layout>
    </item>
    <item>
-    <widget class="QTableView" name="tableView"/>
+    <widget class="QTableView" name="tableView">
+     <property name="font">
+      <font>
+       <pointsize>24</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>50</number>
+     </attribute>
+     <attribute name="verticalHeaderStretchLastSection">
+      <bool>false</bool>
+     </attribute>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -104,22 +133,6 @@
     <hint type="destinationlabel">
      <x>435</x>
      <y>37</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>pressed()</signal>
-   <receiver>DataListView</receiver>
-   <slot>slot_fresh_pressed()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>101</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>144</x>
-     <y>45</y>
     </hint>
    </hints>
   </connection>

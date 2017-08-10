@@ -19,16 +19,15 @@ Ui_MainWindow, QtBaseClass = uic.loadUiType(ui_file)
 
 class Login(Ui_MainWindow, QtBaseClass):
     def __init__(self, parent=None):
-        super(Login, self).__init__(parent)
+        super().__init__(parent)
         self.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.Dialog)
+        self.setWindowFlags(QtCore.Qt.Dialog| QtCore.Qt.WindowTitleHint) # 弹出窗口，无边框
         # self.showFullScreen() # 全屏模式
 
         self.user = None  # 用户名
         self.pwd = None  # 密码
         self.ok = False
 
-        self.show()
         self.exec_()
 
     def login(self):

@@ -33,7 +33,7 @@
       <widget class="QLabel" name="tableTitle">
        <property name="font">
         <font>
-         <family>Aharoni</family>
+         <family>Arial</family>
          <pointsize>36</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -51,7 +51,7 @@
       <widget class="QPushButton" name="pushButton_close">
        <property name="font">
         <font>
-         <family>Aharoni</family>
+         <family>Arial</family>
          <pointsize>26</pointsize>
          <weight>75</weight>
          <bold>true</bold>

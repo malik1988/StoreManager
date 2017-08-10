@@ -3,7 +3,7 @@
 
 from datalistview import DataListView
 from submenu import SubMenu
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 from datamanager import MsgDataManager
 from login import UserLogin
 
@@ -17,7 +17,7 @@ class Menu(DataListView):
     # query = None
 
     # 用户信息
-    isLogin = False
+    isLogin = True
     user_info = {}
 
     def __init__(self):
@@ -27,8 +27,7 @@ class Menu(DataListView):
         self.login()
 
         # 设置界面
-        # self.setStyleSheet("background-color:#2C3E50;")
-        # self.setWindowFlags(QtCore.Qt.Window)
+        self.setWindowFlags(QtCore.Qt.Window)
         self.showFullScreen()
 
         self.setTableTitle('主菜单')
@@ -56,7 +55,6 @@ class Menu(DataListView):
         # 关联数据更新
         self.msgManger.connectDataUpdate(win.update_data_view)
         win.exec_()
-        # win.showDialog()
 
         # 子菜单窗口退出，断开数据更新
         self.msgManger.disconnectDataUpdate()

@@ -57,7 +57,7 @@
         <widget class="QLabel" name="label">
          <property name="font">
           <font>
-           <family>Aharoni</family>
+           <family>Arial</family>
            <pointsize>26</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -72,7 +72,7 @@
         <widget class="QLabel" name="label_name">
          <property name="font">
           <font>
-           <family>Aharoni</family>
+           <family>Arial</family>
            <pointsize>24</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -87,7 +87,7 @@
         <widget class="QLabel" name="label_3">
          <property name="font">
           <font>
-           <family>Aharoni</family>
+           <family>Arial</family>
            <pointsize>26</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -102,7 +102,7 @@
         <widget class="QLineEdit" name="lineEdit">
          <property name="font">
           <font>
-           <family>Aharoni</family>
+           <family>Arial</family>
            <pointsize>24</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -114,7 +114,7 @@
         <widget class="QPushButton" name="pushButton_cancel">
          <property name="font">
           <font>
-           <family>Aharoni</family>
+           <family>Arial</family>
            <pointsize>26</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -132,7 +132,7 @@
         <widget class="QPushButton" name="pushButton_ok">
          <property name="font">
           <font>
-           <family>Aharoni</family>
+           <family>Arial</family>
            <pointsize>26</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -150,7 +150,7 @@
         <widget class="QLabel" name="label_2">
          <property name="font">
           <font>
-           <family>Aharoni</family>
+           <family>Arial</family>
            <pointsize>26</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -165,7 +165,7 @@
         <widget class="QLabel" name="label_value">
          <property name="font">
           <font>
-           <family>Aharoni</family>
+           <family>Arial</family>
            <pointsize>24</pointsize>
            <weight>75</weight>
            <bold>true</bold>
@@ -188,15 +188,15 @@
    <sender>pushButton_ok</sender>
    <signal>pressed()</signal>
    <receiver>MainWindow</receiver>
-   <slot>accept()</slot>
+   <slot>slot_ok_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>50</x>
-     <y>130</y>
+     <x>35</x>
+     <y>200</y>
     </hint>
     <hint type="destinationlabel">
-     <x>264</x>
-     <y>83</y>
+     <x>-5</x>
+     <y>171</y>
     </hint>
    </hints>
   </connection>
@@ -204,17 +204,38 @@
    <sender>pushButton_cancel</sender>
    <signal>pressed()</signal>
    <receiver>MainWindow</receiver>
-   <slot>reject()</slot>
+   <slot>slot_cancel_clicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>167</x>
-     <y>130</y>
+     <x>144</x>
+     <y>199</y>
     </hint>
     <hint type="destinationlabel">
-     <x>264</x>
-     <y>83</y>
+     <x>-3</x>
+     <y>202</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>slot_enter_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>395</x>
+     <y>151</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>95</y>
     </hint>
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>slot_ok_clicked()</slot>
+  <slot>slot_cancel_clicked()</slot>
+  <slot>slot_enter_clicked()</slot>
+ </slots>
 </ui>

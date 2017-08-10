@@ -27,7 +27,7 @@ class Menu(DataListView):
         self.login()
 
         # 设置界面
-        self.setWindowFlags(QtCore.Qt.Window)
+        # self.setWindowFlags(QtCore.Qt.Window)
         self.showFullScreen()
 
         self.setTableTitle('主菜单')

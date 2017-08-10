@@ -31,7 +31,7 @@ QTableView{
     color: rgb(0, 0, 0);  
     border: 1px solid #C07010;          /*边框颜色*/  
     gridline-color:#C07010;             /*grid线颜色*/  
-    background-color:#DAA520;  //背景橙色
+    background-color:#DAA520;  /*背景橙色*/
     alternate-background-color: rgb(200, 200, 200); /*行交替颜色*/  
     selection-background-color: rgb(130, 190, 100); /*选中行背景颜色*/  
 }  
@@ -58,7 +58,7 @@ class DataListView(ui_mainwindow, qtbaseclass):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.setStyleSheet(QSS)
+        # self.setStyleSheet(QSS)
 
     def setTableAutoStretch(self):
         # 设置表格自动填充

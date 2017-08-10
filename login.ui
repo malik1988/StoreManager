@@ -17,7 +17,7 @@
    <string>用户登录</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background:rgb(170, 255, 255)</string>
+   <string notr="true"/>
   </property>
   <property name="modal">
    <bool>false</bool>

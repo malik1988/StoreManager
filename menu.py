@@ -7,11 +7,11 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 from datamanager import MsgDataManager
 from login import UserLogin
 
-PORT_NAME = 'com2'
+import config
 
 
 class Menu(DataListView):
-    msgManger = MsgDataManager(PORT_NAME)
+    msgManger = MsgDataManager(config.APP_COM_NAME)
     # 数据库相关
     # model = QtSql.QSqlQueryModel()
     # query = None

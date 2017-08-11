@@ -17,3 +17,6 @@ APP_ICO_RIGHT = 'mars.ico'
 # 主界面的大小
 APP_SIZE_WIDTH = 1024
 APP_SIZE_HEIGHT = 600
+
+# 串口设备名称
+APP_COM_NAME = 'com2'

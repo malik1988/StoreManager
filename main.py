@@ -8,8 +8,16 @@ QSS = '''
 QDialog,QWindow{
     background-color:#DAA520;
 }
-QMessageBox::Label{
-    font-size: 36px;
+QMessageBox {
+      border-color:#32435E; 
+      border-width:1px; 
+      border-radius: 3px;  
+      min-width:30px; 
+      min-height:23px;  
+      font-size:36px;
+      height: 300px;  
+      width: 200px;  
+      border: none;
 }
 QPushButton
 {

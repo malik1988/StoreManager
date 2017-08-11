@@ -11,7 +11,7 @@ class MsgDataManager(ComMsg):
     '''
 
     # 数据库接口
-    db = QSqlDatabase.addDatabase('QSQLITE')
+    db = QSqlDatabase.addDatabase('QSQLITE','conn2')
 
     SQL_TABLENAME = 'Topper'
     FMT_SQL_CREATE = '''create table if not exists {0} 
@@ -34,9 +34,8 @@ class MsgDataManager(ComMsg):
         super(MsgDataManager, self).__init__(portName)
         self.db.setDatabaseName(config.APP_DB_NAME)
         self.db.open()
-        self.query = QSqlQuery()
-        self.query.exec_(self.FMT_SQL_CREATE.format(self.SQL_TABLENAME))
-        self.query.exec_('commit')
+        self.query = QSqlQuery(
+            self.FMT_SQL_CREATE.format(self.SQL_TABLENAME), self.db)
 
     def msgHandler(self, msg):
         '''数据处理详细过程'''
@@ -47,7 +46,10 @@ class MsgDataManager(ComMsg):
                                                       datetime.now().ctime())
         sql_insert = self.FMT_SQL_INSERT.format(
             self.SQL_TABLENAME, 'id,devId,code,msg,time', values)
-        success = self.query.exec_(sql_insert)
+        try:
+            success = self.query.exec_(sql_insert)
+        except Exception as e:
+            print(e)
         if success:
             self.query.exec_('commit')
             self.onDataUpdate()

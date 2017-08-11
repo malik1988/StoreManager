@@ -5,8 +5,11 @@ from PyQt5.QtWidgets import QApplication
 from menu import Menu
 
 QSS = '''
-QDialog,QWindow,QMessageBox{
+QDialog,QWindow{
     background-color:#DAA520;
+}
+QMessageBox::Label{
+    font-size: 36px;
 }
 QPushButton
 {

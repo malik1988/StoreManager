@@ -85,7 +85,9 @@ from PyQt5 import QtSql
 class UserLogin(Login):
     def check(self, user, pwd):
         '''重写用户验证'''
-        db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
+        ret = False
+
+        db = QtSql.QSqlDatabase.addDatabase('QSQLITE', 'conn1')
         db.setDatabaseName(config.APP_DB_NAME)
         db.open()
         sql_select = 'select pwd from Users where name="{0}"'.format(user)
@@ -93,11 +95,14 @@ class UserLogin(Login):
         while query.next():
             q_pwd = str(query.value(0))
             if q_pwd == pwd:
-                db.close()
-                return True
+                ret = True
+                break
 
+        query.finish()
         db.close()
-        return False
+        del db  # 删除数据库连接
+        QtSql.QSqlDatabase.removeDatabase('conn1')
+        return ret
 
 
 if __name__ == '__main__':

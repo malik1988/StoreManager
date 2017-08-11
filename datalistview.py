@@ -5,6 +5,7 @@ from PyQt5 import QtCore, QtGui
 from PyQt5 import uic
 import os
 import sys
+import config
 
 uipath, uiname = os.path.split(os.path.realpath(__file__))
 uiname = uiname.replace('.py', '.ui')
@@ -20,7 +21,13 @@ class DataListView(ui_mainwindow, qtbaseclass):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.setGeometry(0, 0, 1024, 600)
+        # 调整界面大小
+        self.setGeometry(0, 0, config.APP_SIZE_WIDTH, config.APP_SIZE_HEIGHT)
+        # 设置左右图标
+        left_ico = os.path.join(uipath, config.APP_ICO_LEFT)
+        right_ico = os.path.join(uipath, config.APP_ICO_RIGHT)
+        self.setLogoLeft(left_ico)
+        self.setLogoRight(right_ico)
 
     def setTableAutoStretch(self):
         # 设置表格自动填充

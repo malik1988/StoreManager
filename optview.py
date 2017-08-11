@@ -10,14 +10,6 @@ uiname = uiname.replace('.py', '.ui')
 uifile = os.path.join(uipath, uiname)
 ui_mainwindow, qtbaseclass = uic.loadUiType(uifile)
 
-# QSS = '''
-# QLabel{
-#     color:black;
-#     font-size:30px;
-#     font-family:'宋体';
-# }
-# '''
-
 
 class OptView(ui_mainwindow, qtbaseclass):
     '''操作界面'''
@@ -28,8 +20,6 @@ class OptView(ui_mainwindow, qtbaseclass):
         super().__init__(parent)
 
         self.setupUi(self)
-        # self.setStyleSheet(QSS)
-
         self.label_name.setText(name)
         self.label_value.setText(value)
         self.value = value
@@ -45,6 +35,8 @@ class OptView(ui_mainwindow, qtbaseclass):
             self.accept()
         else:
             self.check = False
+            # 清空文本框，等待下次输入
+            self.lineEdit.setText('')
             QMessageBox.critical(self, '错误', '值不匹配!')
 
     def slot_cancel_clicked(self):

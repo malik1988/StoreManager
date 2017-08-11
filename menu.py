@@ -17,7 +17,7 @@ class Menu(DataListView):
     # query = None
 
     # 用户信息
-    isLogin = True
+    isLogin = False
     user_info = {}
 
     def __init__(self):

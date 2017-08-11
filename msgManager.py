@@ -25,8 +25,19 @@ class MsgStruct(object):
     # 消息源码（bytes类型）
     data = None
 
-    def __init__(self, data, length):
-        self.data = data[:length]
+    def __init__(self,
+                 data=None,
+                 length=0,
+                 msgId=None,
+                 devId=None,
+                 code=None,
+                 msg=None):
+        if data and length:
+            self.data = data[:length]
+        self.msgId = msgId
+        self.devId = devId
+        self.code = code
+        self.msg = msg
 
     def decode(self):
         '''数据解析'''
@@ -40,9 +51,45 @@ class MsgStruct(object):
             index += 1
             self.msg = self.data[index:-1]
 
-    def encode(self):
-        '''数据打包'''
-        pass
+    def encode(self, msgId, devId, msg):
+        '''数据打包
+        - msgId 消息ID（十进制string）
+        - devId 设备ID (十六进string)
+        - msg 消息内容（utf-8字符串）
+        '''
+        # 包头2字节，长度1字节
+        length = 3
+        data = None
+
+        # 消息ID，十进制数(0~65535)
+        msgId = int(msgId)
+        length += 2
+        # 设备ID，十六进制数（0000~FFFF）
+        devId = int(devId, 16)
+        length += 2
+        # 消息内容，ASCII字符串(最大长度255-9=246)
+        msg = bytes(msg, encoding='utf-8')
+        length += len(msg)
+        str_pack = '!BBBHH{0}s'.format(len(msg))
+
+        # 加上校验字节长度
+        length += 1
+
+        data = struct.Struct(str_pack)
+        # 包头两个字节AA55,长度，消息ID，设备ID，消息内容
+        value = (0xAA, 0x55, length, msgId, devId, msg)
+
+        data_bytes = data.pack(*value)
+        check = self.getCheckByte(data_bytes)
+
+        # 填充校验字节
+
+        check_pack = struct.Struct('B')
+        check_value = (check, )
+        check_byte = check_pack.pack(*check_value)
+
+        self.data = data_bytes + check_byte
+        return self.data
 
     def getCheckByte(self, data):
         sum = 0
@@ -87,7 +134,7 @@ class MsgStruct(object):
             strCode = str(iCode[0])
         if self.msg:
             # strMsg = self.bytes2hexStr(self.msg)
-            strMsg=str(self.msg,encoding='utf-8')
+            strMsg = str(self.msg, encoding='utf-8')
 
         return (strMsgId, strDevId, strCode, strMsg)
 

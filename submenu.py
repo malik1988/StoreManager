@@ -11,7 +11,7 @@ class SubMenu(DataListView):
     user = None  # 用户信息
     db = None  # 数据库
 
-    SQL_SELECT = 'select id as 序号,code as 编码,msg as 消息,time as 时间 from Topper'
+    SQL_SELECT = 'select id as 序号,devId as 设备ID,code as 编码,msg as 消息,time as 时间 from Topper'
 
     def __init__(self, parent=None, user=None, db=None):
         super().__init__(parent)

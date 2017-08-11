@@ -3,6 +3,7 @@ from msgManager import MsgStruct, ComMsg
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 
 from datetime import datetime
+import config
 
 
 class MsgDataManager(ComMsg):
@@ -23,14 +24,15 @@ class MsgDataManager(ComMsg):
     FMT_SQL_INSERT = 'insert into {0} ({1}) values ({2})'
 
     FMT_SQL_UPDATE = 'update '
-    SQL_DB_FILENAME = 'test.db'
+    # SQL_DB_FILENAME = 'test.db'
+    # SQL_DB_MEMORY = ':memory:'
 
     # 数据更新回调
     handler = None
 
     def __init__(self, portName):
         super(MsgDataManager, self).__init__(portName)
-        self.db.setDatabaseName(':memory:')
+        self.db.setDatabaseName(config.APP_DB_NAME)
         self.db.open()
         self.query = QSqlQuery()
         self.query.exec_(self.FMT_SQL_CREATE.format(self.SQL_TABLENAME))

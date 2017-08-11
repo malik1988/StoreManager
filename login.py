@@ -12,9 +12,12 @@ from PyQt5 import QtCore
 from PyQt5 import uic
 import os
 import sys
-ui_file = os.path.split(os.path.realpath(__file__))[0] + '/login.ui'
 
-Ui_MainWindow, QtBaseClass = uic.loadUiType(ui_file)
+uipath, uiname = os.path.split(os.path.realpath(__file__))
+uiname = uiname.replace('.py', '.ui')
+uifile = os.path.join(uipath, uiname)
+
+Ui_MainWindow, QtBaseClass = uic.loadUiType(uifile)
 
 
 class Login(Ui_MainWindow, QtBaseClass):
@@ -70,24 +73,35 @@ class Login(Ui_MainWindow, QtBaseClass):
         '''重写键盘响应事件'''
         if event.key() == QtCore.Qt.Key_Escape:
             # 不处理ESC按键
-            pass
+            event.ignore()
         else:
             super().keyPressEvent(event)
+
+
+import config
+from PyQt5 import QtSql
 
 
 class UserLogin(Login):
     def check(self, user, pwd):
         '''重写用户验证'''
-        if user == pwd:
-            self.user = user
-            self.pwd = pwd
-            return True
-        else:
-            return False
+        db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
+        db.setDatabaseName(config.APP_DB_NAME)
+        db.open()
+        sql_select = 'select pwd from Users where name="{0}"'.format(user)
+        query = QtSql.QSqlQuery(sql_select, db)
+        while query.next():
+            q_pwd = str(query.value(0))
+            if q_pwd == pwd:
+                db.close()
+                return True
+
+        db.close()
+        return False
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    d = Login()
+    d = UserLogin()
     d.show()
     sys.exit(app.exec_())

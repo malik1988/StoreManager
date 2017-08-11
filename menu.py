@@ -59,6 +59,7 @@ class Menu(DataListView):
         # 子菜单窗口退出，断开数据更新
         self.msgManger.disconnectDataUpdate()
         self.setVisible(True)
+        self.showFullScreen()
 
     def login(self):
         '''登录'''

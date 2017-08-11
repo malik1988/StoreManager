@@ -55,6 +55,14 @@ class OptView(ui_mainwindow, qtbaseclass):
         '''文本编辑回车键按下'''
         self.slot_ok_clicked()
 
+    def keyPressEvent(self, event):
+        '''重写键盘响应事件'''
+        if event.key() == QtCore.Qt.Key_Escape:
+            # 不处理ESC按键
+            pass
+        else:
+            super().keyPressEvent(event)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

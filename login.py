@@ -21,7 +21,8 @@ class Login(Ui_MainWindow, QtBaseClass):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.Dialog| QtCore.Qt.WindowTitleHint) # 弹出窗口，无边框
+        self.setWindowFlags(
+            QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint)  # 弹出窗口，无边框
         # self.showFullScreen() # 全屏模式
 
         self.user = None  # 用户名
@@ -64,6 +65,14 @@ class Login(Ui_MainWindow, QtBaseClass):
         '''窗口关闭事件'''
         QMessageBox.warning(self, '警告', '请等登录')
         event.ignore()  # 忽略关闭，继续运行
+
+    def keyPressEvent(self, event):
+        '''重写键盘响应事件'''
+        if event.key() == QtCore.Qt.Key_Escape:
+            # 不处理ESC按键
+            pass
+        else:
+            super().keyPressEvent(event)
 
 
 class UserLogin(Login):

@@ -140,6 +140,10 @@ class MsgStruct(object):
 
 
 class SerialReciver(QtCore.QThread):
+    '''接收线程
+    - parent 线程父节点
+    - fun 线程运行回调
+    '''
     def __init__(self, parent=None, fun=None):
         super().__init__(parent)
         self.__func = fun
@@ -150,8 +154,11 @@ class SerialReciver(QtCore.QThread):
 
 
 class ComMsg(QtCore.QObject):
+    # 串口设备
     serial = QtSerialPort.QSerialPort()
+    # 是否打开标志
     isOpen = False
+    # 接收线程
     thread = None
 
     def __init__(self, portName):
@@ -174,7 +181,9 @@ class ComMsg(QtCore.QObject):
             self.serial.open(QtCore.QIODevice.ReadWrite)
             if self.serial.isOpen():
                 self.isOpen = True
+                # 设备打开创建线程
                 self.thread = SerialReciver(self, self.wait)
+                # 运行线程
                 self.thread.start()
             else:
                 print('Debug: Com %s Open Failed' % self.serial.portName())
@@ -231,8 +240,6 @@ class ComMsg(QtCore.QObject):
         '''消息数据处理回调函数接口（根据需要自己实现）'''
         pass
 
-    def startThread(self):
-        self.thread.start()
 
 
 def main():

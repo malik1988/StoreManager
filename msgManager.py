@@ -139,13 +139,26 @@ class MsgStruct(object):
         return (strMsgId, strDevId, strCode, strMsg)
 
 
-class ComMsg(object):
+class SerialReciver(QtCore.QThread):
+    def __init__(self, parent=None, fun=None):
+        super().__init__(parent)
+        self.__func = fun
+
+    def run(self):
+        if self.__func:
+            self.__func()
+
+
+class ComMsg(QtCore.QObject):
     serial = QtSerialPort.QSerialPort()
     isOpen = False
+    thread = None
 
     def __init__(self, portName):
+        super().__init__()
         valid = False
         for info in QtSerialPort.QSerialPortInfo.availablePorts():
+            print('Debug: Avilable Com :%s' % info.portName())
             if portName.upper() == info.portName().upper():
                 valid = True
                 self.serial.setPort(info)
@@ -158,11 +171,13 @@ class ComMsg(object):
             self.serial.setStopBits(self.serial.OneStop)
 
             # self.serial.readyRead.connect(self.onRead)
-            try:
-                self.serial.open(QtCore.QIODevice.ReadWrite)
+            self.serial.open(QtCore.QIODevice.ReadWrite)
+            if self.serial.isOpen():
                 self.isOpen = True
-            except Exception as e:
-                print(e)
+                self.thread = SerialReciver(self, self.wait)
+                self.thread.start()
+            else:
+                print('Debug: Com %s Open Failed' % self.serial.portName())
 
         else:
             print('%s is Not Valid' % portName)
@@ -172,6 +187,7 @@ class ComMsg(object):
         buf = self.serial.readAll()
         # 获取bytes类型的数据进行下一步处理
         buf = buf.data()
+        print('Debug: Got Data %r' % buf)
         while len(buf) >= MIN_LEN:
             if buf[0] == 0xaa and buf[1] == 0x55:  # 找到头
                 # 获取长度
@@ -214,6 +230,9 @@ class ComMsg(object):
     def msgHandler(self, msg):
         '''消息数据处理回调函数接口（根据需要自己实现）'''
         pass
+
+    def startThread(self):
+        self.thread.start()
 
 
 def main():

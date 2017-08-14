@@ -69,7 +69,7 @@ class Login(Ui_MainWindow, QtBaseClass):
 
     def closeEvent(self, event):
         '''窗口关闭事件'''
-        QMessageBox.warning(self, '警告', '请等登录')
+        QMessageBox.warning(self, '警告', '请登录!')
         event.ignore()  # 忽略关闭，继续运行
 
     def keyPressEvent(self, event):

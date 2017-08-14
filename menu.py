@@ -46,7 +46,7 @@ class Menu(DataListView):
         self.setTableReadOnly()
 
         # 关联接收事件处理
-        self.msgManger.connectRead()
+        # self.msgManger.connectRead()
 
     def show_sub_menu(self):
         '''显示子菜单'''

@@ -2,6 +2,7 @@
 '''配置文件
 '''
 import os
+import platform
 
 # APP所在目录
 APP_DIR = os.path.split(os.path.realpath(__file__))[0]
@@ -19,4 +20,8 @@ APP_SIZE_WIDTH = 1024
 APP_SIZE_HEIGHT = 600
 
 # 串口设备名称
-APP_COM_NAME = 'com2'
+# Linux系统COM名设置： APP_COM_NAME='ttyS0'
+if platform.system() == 'Linux':
+    APP_COM_NAME = 'ttyS0'
+else:
+    APP_COM_NAME = 'com2'

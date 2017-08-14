@@ -11,7 +11,7 @@ class MsgDataManager(ComMsg):
     '''
 
     # 数据库接口
-    db = QSqlDatabase.addDatabase('QSQLITE','conn2')
+    db = QSqlDatabase.addDatabase('QSQLITE', 'conn2')
 
     SQL_TABLENAME = 'Topper'
     FMT_SQL_CREATE = '''create table if not exists {0} 

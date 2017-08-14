@@ -17,7 +17,6 @@ QMessageBox {
       font-size:36px;
       height: 300px;  
       width: 200px;  
-      border: none;
 }
 QPushButton
 {
@@ -29,6 +28,7 @@ QPushButton
     min-width: 150px; /*最小按钮大小（QmessageBox最小）*/
     min-height: 50px;
     text-align: center;
+    font-size: 36px;
 }
 
 QTableView{  

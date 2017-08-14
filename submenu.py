@@ -5,6 +5,7 @@ from datalistview import DataListView
 from PyQt5 import QtSql
 
 from optview import OptView
+from datetime import datetime
 
 
 class SubMenu(DataListView):
@@ -36,6 +37,7 @@ class SubMenu(DataListView):
     def slot_table_click(self, index):
         # col = index.column()
         row = index.row()
+        strId = str(self.model.index(row, 0).data())
         name = str(self.model.index(row, 1).data())
         value = str(self.model.index(row, 2).data())
         if value:
@@ -44,4 +46,14 @@ class SubMenu(DataListView):
             opt.exec_()
             if opt.check:
                 # 操作成功
-                pass
+                # 更新数据库
+                query = QtSql.QSqlQuery(self.db)
+                userName = ''
+                loginTime = ''
+                for key, value in self.user.items():
+                    userName = key
+                    loginTime = value
+                sql_update = 'update Topper set userName="{0}",optTime="{1}",loginTime="{2}" where id={3}'.format(
+                    userName, datetime.now().ctime(), loginTime, strId)
+                if query.exec_(sql_update):
+                    print('Update sucess')

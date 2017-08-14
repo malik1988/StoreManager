@@ -12,6 +12,7 @@ from PyQt5 import QtCore
 from PyQt5 import uic
 import os
 import sys
+from datetime import datetime
 
 uipath, uiname = os.path.split(os.path.realpath(__file__))
 uiname = uiname.replace('.py', '.ui')
@@ -30,6 +31,7 @@ class Login(Ui_MainWindow, QtBaseClass):
 
         self.user = None  # 用户名
         self.pwd = None  # 密码
+        self.loginTime = None  # 登录时间
         self.ok = False
 
         self.exec_()
@@ -62,7 +64,8 @@ class Login(Ui_MainWindow, QtBaseClass):
         '''
         self.user = user
         self.pwd = pwd
-        return False
+        self.loginTime = datetime.now().ctime()
+        return True
 
     def closeEvent(self, event):
         '''窗口关闭事件'''
@@ -95,7 +98,12 @@ class UserLogin(Login):
         while query.next():
             q_pwd = str(query.value(0))
             if q_pwd == pwd:
+                # 匹配成功
                 ret = True
+                # 保存用户名和密码
+                self.user = user
+                self.pwd = pwd
+                self.loginTime = datetime.now().ctime()
                 break
 
         query.finish()

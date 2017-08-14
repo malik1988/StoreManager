@@ -38,7 +38,7 @@ class Menu(DataListView):
         model.setHorizontalHeaderLabels(headers)
         values = ('name1', 'name2', 'name3')
         for i, x in enumerate(values):
-            model.setItem(i, 0, QtGui.QStandardItem(str(i)))
+            model.setItem(i, 0, QtGui.QStandardItem(str(i + 1)))
             model.setItem(i, 1, QtGui.QStandardItem(x))
             model.setItem(i, 2, QtGui.QStandardItem('start'))
 
@@ -65,7 +65,8 @@ class Menu(DataListView):
         '''登录'''
         if not self.isLogin:
             user = UserLogin(self)
-            self.user_info[user.user] = user.pwd
+            # 记录用户名和登陆时间
+            self.user_info[user.user] = user.loginTime
             self.isLogin = True
             self.setVisible(True)
 

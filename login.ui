@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>126</height>
+    <width>419</width>
+    <height>210</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,65 +22,88 @@
   <property name="modal">
    <bool>false</bool>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <property name="sizeConstraint">
-    <enum>QLayout::SetFixedSize</enum>
-   </property>
-   <property name="formAlignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label_3">
      <property name="font">
       <font>
-       <family>Arial</family>
-       <pointsize>20</pointsize>
+       <family>Aharoni</family>
+       <pointsize>36</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="text">
-      <string>用户：</string>
+      <string>管理系统</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="lineEdit_user">
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>18</pointsize>
-      </font>
-     </property>
-     <property name="placeholderText">
-      <string>用户名</string>
-     </property>
-    </widget>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>用户：</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineEdit_user">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="placeholderText">
+        <string>用户名</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>密码：</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="lineEdit_pwd">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+       <property name="placeholderText">
+        <string>密码</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>20</pointsize>
-      </font>
-     </property>
+   <item>
+    <widget class="QPushButton" name="pushButton">
      <property name="text">
-      <string>密码：</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QLineEdit" name="lineEdit_pwd">
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>18</pointsize>
-      </font>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-     <property name="placeholderText">
-      <string>密码</string>
+      <string>登录</string>
      </property>
     </widget>
    </item>
@@ -89,34 +112,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>lineEdit_pwd</sender>
-   <signal>returnPressed()</signal>
+   <sender>pushButton</sender>
+   <signal>pressed()</signal>
    <receiver>login</receiver>
    <slot>login()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>194</x>
-     <y>79</y>
+     <x>138</x>
+     <y>186</y>
     </hint>
     <hint type="destinationlabel">
-     <x>214</x>
-     <y>117</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>lineEdit_user</sender>
-   <signal>returnPressed()</signal>
-   <receiver>login</receiver>
-   <slot>login()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>243</x>
-     <y>31</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>62</y>
+     <x>15</x>
+     <y>159</y>
     </hint>
    </hints>
   </connection>

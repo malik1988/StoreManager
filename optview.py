@@ -4,10 +4,9 @@ from PyQt5 import QtCore, QtGui
 from PyQt5 import uic
 import os
 import sys
+import config
 
-uipath, uiname = os.path.split(os.path.realpath(__file__))
-uiname = uiname.replace('.py', '.ui')
-uifile = os.path.join(uipath, uiname)
+uifile = os.path.join(config.APP_DIR, 'optview.ui')
 ui_mainwindow, qtbaseclass = uic.loadUiType(uifile)
 
 

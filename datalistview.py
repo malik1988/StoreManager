@@ -7,9 +7,7 @@ import os
 import sys
 import config
 
-uipath, uiname = os.path.split(os.path.realpath(__file__))
-uiname = uiname.replace('.py', '.ui')
-uifile = os.path.join(uipath, uiname)
+uifile = os.path.join(config.APP_DIR, 'datalistview.ui')
 ui_mainwindow, qtbaseclass = uic.loadUiType(uifile)
 
 
@@ -24,8 +22,8 @@ class DataListView(ui_mainwindow, qtbaseclass):
         # 调整界面大小
         self.setGeometry(0, 0, config.APP_SIZE_WIDTH, config.APP_SIZE_HEIGHT)
         # 设置左右图标
-        left_ico = os.path.join(uipath, config.APP_ICO_LEFT)
-        right_ico = os.path.join(uipath, config.APP_ICO_RIGHT)
+        left_ico = os.path.join(config.APP_DIR, config.APP_ICO_LEFT)
+        right_ico = os.path.join(config.APP_DIR, config.APP_ICO_RIGHT)
         self.setLogoLeft(left_ico)
         self.setLogoRight(right_ico)
 

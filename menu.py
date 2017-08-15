@@ -81,6 +81,7 @@ class Menu(DataListView):
         col = index.column()
         row = index.row()
         value = str(self.model.index(row, col).data())
+        name = str(self.model.index(row, 1).data())
 
-        if value == 'start':
+        if value == 'start' and name == 'name1':
             self.show_sub_menu()

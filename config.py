@@ -3,9 +3,13 @@
 '''
 import os
 import platform
+import sys
 
 # APP所在目录
-APP_DIR = os.path.split(os.path.realpath(__file__))[0]
+if getattr(sys, 'frozen', False):
+    APP_DIR = sys._MEIPASS
+else:
+    APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # 数据库名
 # 内存方式：APP_DB_NAME=':memory:'

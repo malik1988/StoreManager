@@ -1,7 +1,6 @@
 # coding: utf-8
-import os
 import compileall
+import config
 
-filePath = os.path.split(os.path.realpath(__file__))[0]
 
-compileall.compile_dir(filePath)
+compileall.compile_dir(config.APP_DIR)

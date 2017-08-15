@@ -13,10 +13,11 @@ from PyQt5 import uic
 import os
 import sys
 from datetime import datetime
+import config
 
-uipath, uiname = os.path.split(os.path.realpath(__file__))
-uiname = uiname.replace('.py', '.ui')
-uifile = os.path.join(uipath, uiname)
+# uipath, uiname = os.path.split(os.path.realpath(__file__))
+# uiname = uiname.replace('.py', '.ui')
+uifile = os.path.join(config.APP_DIR, 'login.ui')
 
 Ui_MainWindow, QtBaseClass = uic.loadUiType(uifile)
 

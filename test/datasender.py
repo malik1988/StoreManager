@@ -1,4 +1,5 @@
 # coding: utf-8
+'''串口测试数据生成器'''
 
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, QtSerialPort
@@ -7,6 +8,7 @@ import os
 import sys
 import struct
 import binascii
+from datetime import datetime
 
 uipath, uiname = os.path.split(os.path.realpath(__file__))
 uiname = uiname.replace('.py', '.ui')
@@ -35,16 +37,13 @@ class DataSender(ui_mainwindow, qtbaseclass):
 
         self.serial.readyRead.connect(self.onRead)
 
-        
     def onRead(self):
         '''数据接收并显示'''
-        data=self.serial.readAll()
+        data = self.serial.readAll()
         # str_data=binascii.unhexlify(data)
-        str_data=str(data)
+        str_data = '[%s]: ' % datetime.now().ctime() + str(data)
 
-        
         self.textBrowser.setPlainText(str_data)
-
 
     def build_data(self):
         '''产生数据
@@ -129,8 +128,8 @@ class DataSender(ui_mainwindow, qtbaseclass):
         if self.serial.isOpen():
             self.pushButton_connect.setText('关闭连接')
             self.comboBox_port.setEnabled(False)
-            QMessageBox.warning(self,'警告','设备已经打开！')
+            QMessageBox.warning(self, '警告', '设备已经打开！')
         else:
             self.pushButton_connect.setText('打开连接')
             self.comboBox_port.setEnabled(True)
-            QMessageBox.warning(self,'警告','设备关闭！')
+            QMessageBox.warning(self, '警告', '设备关闭！')

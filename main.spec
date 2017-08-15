@@ -8,7 +8,9 @@ a = Analysis(['main.py'],
              binaries=[
                 ('datalistview.ui','.'),
                 ('login.ui','.'),
-                ('optview.ui','.')
+                ('optview.ui','.'),
+                ('data.ico','.'),
+                ('mars.ico','.')
                 ],
              datas=[],
              hiddenimports=[],

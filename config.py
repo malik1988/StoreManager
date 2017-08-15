@@ -11,6 +11,7 @@ if getattr(sys, 'frozen', False):
 else:
     APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
+print('Debug: APP_DIR %s' % APP_DIR)
 # 数据库名
 # 内存方式：APP_DB_NAME=':memory:'
 APP_DB_NAME = os.path.join(APP_DIR, 'test.db')
